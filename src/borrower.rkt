@@ -1,3 +1,9 @@
+#lang racket
+
+(provide make-borrower)
+(provide get-name)
+(provide set-name)
+
 (struct borrower (name max-books) #:transparent)
 
 (define (make-borrower n mb)
