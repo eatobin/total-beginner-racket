@@ -1,7 +1,7 @@
 #lang racket
 
-(require "../src/borrower.rkt"
-         rackunit)
+(require rackunit
+         "../src/borrower.rkt")
 
 (define br1 (make-borrower "borrower1" 1))
 

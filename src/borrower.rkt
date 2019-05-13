@@ -1,8 +1,7 @@
 #lang racket
 
-(provide make-borrower)
-(provide get-name)
-(provide set-name)
+(provide (struct-out borrower))
+(provide (all-defined-out))
 
 (struct borrower (name max-books) #:transparent)
 
