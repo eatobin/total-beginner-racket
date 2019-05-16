@@ -1,4 +1,4 @@
-#lang racket
+(module borrower-test racket)
 
 (require rackunit
          "../src/borrower.rkt")
