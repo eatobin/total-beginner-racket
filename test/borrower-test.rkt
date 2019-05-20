@@ -1,3 +1,6 @@
+; ,cd "/home/eric/lisp_projects/scheme/racket/total-racket"
+; ,enter "test/borrower-test.rkt"
+
 (module borrower-test racket
   
   (require rackunit

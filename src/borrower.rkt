@@ -1,3 +1,6 @@
+; ,cd "/home/eric/lisp_projects/scheme/racket/total-racket"
+; ,enter "test/borrower.rkt"
+
 (module borrower racket
   
   (provide (struct-out borrower))
