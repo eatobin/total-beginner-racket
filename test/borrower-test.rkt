@@ -8,4 +8,6 @@
   
   (check-equal? (set-name br1 "joey") (borrower "joey" 1))
   
-  (check-equal? (get-max-books br1) 1))
+  (check-equal? (get-max-books br1) 1)
+  
+  (check-equal? (set-max-books br1 11) (borrower "borrower1" 11)))
