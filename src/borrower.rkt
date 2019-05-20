@@ -15,4 +15,8 @@
 
   (define get-max-books
     (lambda (br)
-      (borrower-max-books br))))
+      (borrower-max-books br)))
+  
+  (define set-max-books
+    (lambda (br mb)
+      (struct-copy borrower br [max-books mb]))))
