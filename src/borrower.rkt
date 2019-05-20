@@ -1,18 +1,19 @@
-(module borrower racket
-  (provide (struct-out borrower))
-  (provide (all-defined-out))
+#lang racket
 
-  (struct borrower (name max-books) #:transparent)
+(provide (struct-out borrower))
+(provide (all-defined-out))
 
-  (define (make-borrower n mb)
-    (borrower n mb))
+(struct borrower (name max-books) #:transparent)
 
-  (define (get-name br)
-    (borrower-name br))
+(define (make-borrower n mb)
+  (borrower n mb))
 
-  (define (set-name br n)
-    (struct-copy borrower br [name n]))
+(define (get-name br)
+  (borrower-name br))
 
-  (define get-max-books
-    (lambda (br)
-      (borrower-max-books br))))
+(define (set-name br n)
+  (struct-copy borrower br [name n]))
+
+(define get-max-books
+  (lambda (br)
+    (borrower-max-books br)))
