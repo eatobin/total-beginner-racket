@@ -6,4 +6,6 @@
   
   (check-equal? (get-name br1) "borrower1")
   
-  (check-equal? (set-name br1 "joey") (borrower "joey" 1)))
+  (check-equal? (set-name br1 "joey") (borrower "joey" 1))
+  
+  (check-equal? (get-max-books br1) 1))
