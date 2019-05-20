@@ -1,4 +1,5 @@
 (module borrower racket
+  
   (provide (struct-out borrower))
   (provide (all-defined-out))
 
@@ -19,4 +20,7 @@
   
   (define set-max-books
     (lambda (br mb)
-      (struct-copy borrower br [max-books mb]))))
+      (struct-copy borrower br [max-books mb])))
+  
+  (define borrower-to-string
+    "do this"))
