@@ -35,4 +35,36 @@
   (check-equal? (get-name br1) "borrower1")
   (check-equal? (set-name br1 "joey") (borrower "joey" 1))
   (check-equal? (get-max-books br1) 1)
-  (check-equal? (set-max-books br1 11) (borrower "borrower1" 11)))
+  (check-equal? (set-max-books br1 11) (borrower "borrower1" 11))
+  (test-case
+    "List has length 4 and all elements even"
+      (let ([lst (list 2 4 6 8)])
+        (check = (length lst) 4)
+        (for-each
+          (lambda (elt)
+            (check-pred even? elt))
+        lst))))
+
+; (module* test #f
+;   (define file-tests
+;     (test-suite
+;       "Tests for borrower.rkt"
+     
+;       (require rackunit/text-ui)
+;       (define br1 (make-borrower "borrower1" 1))
+   
+;       (check-equal? (get-name br1) "borrower1")
+;       (check-equal? (set-name br1 "joey") (borrower "joey" 1))
+;       (check-equal? (get-max-books br1) 1)
+;       (check-equal? (set-max-books br1 11) (borrower "borrower1" 11))
+   
+;      (test-case
+;       "List has length 4 and all elements even"
+;       (let ([lst (list 2 4 6 9)])
+;         (check = (length lst) 4)
+;         (for-each
+;           (lambda (elt)
+;             (check-pred even? elt))
+;         lst)))
+;      ))
+;   (run-tests file-tests))
