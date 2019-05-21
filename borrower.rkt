@@ -1,5 +1,6 @@
 ; ,cd "/home/eric/lisp_projects/scheme/racket/total-racket"
-; ,enter "src/borrower.rkt"
+; ,enter "borrower.rkt"
+; [eric@linux-x2vq total-racket](master)$ raco test "borrower.rkt"
 
 #lang racket
 
