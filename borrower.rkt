@@ -26,8 +26,8 @@
   (lambda (br mb)
     (struct-copy borrower br [max-books mb])))
   
-(define borrower-to-string
-  "do this")
+(define (borrower-to-string br)
+  (string-append "do this" " and this " (+ 7 7) br)
 
 (module* test #f
   (require rackunit
