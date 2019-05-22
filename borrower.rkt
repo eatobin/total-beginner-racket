@@ -21,30 +21,30 @@
 (define get-max-books
   (lambda (br)
     (borrower-max-books br)))
-  
+
 (define set-max-books
   (lambda (br mb)
     (struct-copy borrower br [max-books mb])))
-  
+
 (define (borrower-to-string br)
   (string-append "do this" " and this " (number->string (+ 7 7)) " " br))
 
 (module* test #f
   (require rackunit
            rackunit/text-ui)
-  
+
   (define br1 (make-borrower "borrower1" 1))
-        
+
   (define file-tests
     (test-suite
       "Tests for borrower.rkt"
- 
+
       (check-equal? (get-name br1) "borrower1")
       (check-equal? (set-name br1 "joey") (borrower "joey" 1))
       (check-equal? (get-max-books br1) 1)
       (check-equal? (set-max-books br1 11) (borrower "borrower1" 11))
       (check-equal? (borrower-to-string "end") "do this and this 14 end")
-  
+
       (test-case
         "List has length 4 and all elements even"
           (let ([lst (list 2 4 6 8)])
@@ -53,5 +53,5 @@
               (lambda (elt)
                 (check-pred even? elt))
             lst)))))
-  
+
   (run-tests file-tests))
