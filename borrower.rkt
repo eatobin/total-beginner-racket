@@ -11,21 +11,24 @@
          set-max-books
          borrower-to-string)
 
+(define (name? name)
+  (string? name))
+
 (define (max-books? max-books)
   (and (integer? max-books) (>= max-books 0) (<= max-books 10)))
 
 (struct Borrower (name max-books) #:transparent)
  
 (define/contract (make-borrower name max-books)
-  (-> string? max-books? Borrower?)
+  (-> name? max-books? Borrower?)
   (Borrower name max-books))
 
 (define/contract (get-name borrower)
-  (-> Borrower? string?)
+  (-> Borrower? name?)
   (Borrower-name borrower))
 
 (define/contract (set-name borrower name)
-  (-> Borrower? string? Borrower?)
+  (-> Borrower? name? Borrower?)
   (struct-copy Borrower borrower [name name]))
 
 (define/contract get-max-books
