@@ -28,12 +28,14 @@
   (lambda (borrower)
     (Borrower-max-books borrower)))
 
-; (define set-max-books
-;   (lambda (br mb)
-;     (struct-copy borrower br [max-books mb])))
+(define/contract set-max-books
+  (-> Borrower? max-books? Borrower?)
+  (lambda (borrower max-books)
+    (struct-copy Borrower borrower [max-books max-books])))
 
-; (define (borrower-to-string br)
-;   (string-append "do this" " and this " (number->string (+ 7 7)) " " br))
+(define (borrower-to-string borrower)
+  (-> Borrower? string?)
+  (string-append (get-name borrower) " (" (number->string (get-max-books borrower)) " books)"))
 
 ; Tests
 (module* test #f
@@ -51,8 +53,8 @@
           (check-equal? (get-name br1) "borrower1"))
       (check-equal? (set-name br1 "joey") (Borrower "joey" 1))
       (check-equal? (get-max-books br1) 1)
-      ; (check-equal? (set-max-books br1 11) (borrower "borrower1" 11))
-      ; (check-equal? (borrower-to-string "end") "do this and this 14 end")
+      (check-equal? (set-max-books br1 10) (Borrower "borrower1" 10))
+      (check-equal? (borrower-to-string br1) "borrower1 (1 books)")
 ))
 
   (run-tests file-tests))
