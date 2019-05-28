@@ -23,9 +23,10 @@
   (-> Borrower? string? Borrower?)
   (struct-copy Borrower borrower [name name]))
 
-; (define get-max-books
-;   (lambda (br)
-;     (borrower-max-books br)))
+(define/contract get-max-books
+  (-> Borrower? integer?)
+  (lambda (borrower)
+    (Borrower-max-books borrower)))
 
 ; (define set-max-books
 ;   (lambda (br mb)
@@ -49,7 +50,7 @@
         "Borrower has the correct name"
           (check-equal? (get-name br1) "borrower1"))
       (check-equal? (set-name br1 "joey") (Borrower "joey" 1))
-      ; (check-equal? (get-max-books br1) 1)
+      (check-equal? (get-max-books br1) 1)
       ; (check-equal? (set-max-books br1 11) (borrower "borrower1" 11))
       ; (check-equal? (borrower-to-string "end") "do this and this 14 end")
 ))
