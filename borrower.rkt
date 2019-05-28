@@ -4,7 +4,12 @@
 
 #lang racket
 
-(provide make-borrower)
+(provide make-borrower
+         get-name
+         set-name
+         get-max-books
+         set-max-books
+         borrower-to-string)
 
 (define (max-books? max-books)
   (and (integer? max-books) (>= max-books 0) (<= max-books 10)))
@@ -33,7 +38,7 @@
   (lambda (borrower max-books)
     (struct-copy Borrower borrower [max-books max-books])))
 
-(define (borrower-to-string borrower)
+(define/contract (borrower-to-string borrower)
   (-> Borrower? string?)
   (string-append (get-name borrower) " (" (number->string (get-max-books borrower)) " books)"))
 
