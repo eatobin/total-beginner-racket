@@ -6,8 +6,8 @@
 
 (provide make-borrower
          get-name
-         set-name)
-;;          get-max-books
+         set-name
+         get-max-books)
 ;;          set-max-books
 ;;          borrower-to-string)
 
@@ -20,6 +20,8 @@
 (define (set-name borrower name)
   (hash-update borrower 'name (lambda (n) name)))
 
+(define (get-max-books borrower)
+  (hash-ref borrower 'max-books))
 
 
 
@@ -60,7 +62,7 @@
         "Borrower has the correct name"
           (check-equal? (get-name br1) "borrower1"))
       (check-equal? (set-name br1 "joey") (make-borrower "joey" 1))
-      ;; (check-equal? (get-max-books br1) 1)
+      (check-equal? (get-max-books br1) 1)
 ;;       (check-equal? (set-max-books br1 10) (Borrower "borrower1" 10))
 ;;       (check-equal? (borrower-to-string br1) "borrower1 (1 books)")
 ))
