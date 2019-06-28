@@ -5,45 +5,43 @@
 #lang racket
 
 (provide make-borrower
-         get-name
-         set-name
-         get-max-books
-         set-max-books
-         borrower-to-string)
+         get-name)
+;;          set-name
+;;          get-max-books
+;;          set-max-books
+;;          borrower-to-string)
 
-(define (name? name)
-  (string? name))
+(define (make-borrower name max-books)
+  (hasheq 'name name 'max-books max-books))
 
-(define (max-books? max-books)
-  (and (integer? max-books) (>= max-books 0) (<= max-books 10)))
+(define (get-name borrower)
+  (hash-ref borrower 'name))
 
-(struct Borrower (name max-books) #:transparent)
- 
-(define/contract (make-borrower name max-books)
-  (-> name? max-books? Borrower?)
-  (Borrower name max-books))
 
-(define/contract (get-name borrower)
-  (-> Borrower? name?)
-  (Borrower-name borrower))
 
-(define/contract (set-name borrower name)
-  (-> Borrower? name? Borrower?)
-  (struct-copy Borrower borrower [name name]))
 
-(define/contract get-max-books
-  (-> Borrower? integer?)
-  (lambda (borrower)
-    (Borrower-max-books borrower)))
 
-(define/contract set-max-books
-  (-> Borrower? max-books? Borrower?)
-  (lambda (borrower max-books)
-    (struct-copy Borrower borrower [max-books max-books])))
+;; (define/contract (get-name borrower)
+;;   (-> Borrower? name?)
+;;   (Borrower-name borrower))
 
-(define/contract (borrower-to-string borrower)
-  (-> Borrower? string?)
-  (string-append (get-name borrower) " (" (number->string (get-max-books borrower)) " books)"))
+;; (define/contract (set-name borrower name)
+;;   (-> Borrower? name? Borrower?)
+;;   (struct-copy Borrower borrower [name name]))
+
+;; (define/contract get-max-books
+;;   (-> Borrower? integer?)
+;;   (lambda (borrower)
+;;     (Borrower-max-books borrower)))
+
+;; (define/contract set-max-books
+;;   (-> Borrower? max-books? Borrower?)
+;;   (lambda (borrower max-books)
+;;     (struct-copy Borrower borrower [max-books max-books])))
+
+;; (define/contract (borrower-to-string borrower)
+;;   (-> Borrower? string?)
+;;   (string-append (get-name borrower) " (" (number->string (get-max-books borrower)) " books)"))
 
 ; Tests
 (module* test #f
@@ -58,11 +56,11 @@
 
       (test-case
         "Borrower has the correct name"
-          (check-equal? (get-name br1) "borrower1"))
-      (check-equal? (set-name br1 "joey") (Borrower "joey" 1))
-      (check-equal? (get-max-books br1) 1)
-      (check-equal? (set-max-books br1 10) (Borrower "borrower1" 10))
-      (check-equal? (borrower-to-string br1) "borrower1 (1 books)")
-))
+          (check-equal? (get-name br1) "borrower1"))))
+;;       (check-equal? (set-name br1 "joey") (Borrower "joey" 1))
+;;       (check-equal? (get-max-books br1) 1)
+;;       (check-equal? (set-max-books br1 10) (Borrower "borrower1" 10))
+;;       (check-equal? (borrower-to-string br1) "borrower1 (1 books)")
+;; ))
 
   (run-tests file-tests))
