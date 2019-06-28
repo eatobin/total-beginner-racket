@@ -5,8 +5,8 @@
 #lang racket
 
 (provide make-borrower
-         get-name)
-;;          set-name
+         get-name
+         set-name)
 ;;          get-max-books
 ;;          set-max-books
 ;;          borrower-to-string)
@@ -17,6 +17,8 @@
 (define (get-name borrower)
   (hash-ref borrower 'name))
 
+(define (set-name borrower name)
+  (hash-update borrower 'name (lambda (n) name)))
 
 
 
@@ -56,11 +58,11 @@
 
       (test-case
         "Borrower has the correct name"
-          (check-equal? (get-name br1) "borrower1"))))
-;;       (check-equal? (set-name br1 "joey") (Borrower "joey" 1))
-;;       (check-equal? (get-max-books br1) 1)
+          (check-equal? (get-name br1) "borrower1"))
+      (check-equal? (set-name br1 "joey") (make-borrower "joey" 1))
+      ;; (check-equal? (get-max-books br1) 1)
 ;;       (check-equal? (set-max-books br1 10) (Borrower "borrower1" 10))
 ;;       (check-equal? (borrower-to-string br1) "borrower1 (1 books)")
-;; ))
+))
 
   (run-tests file-tests))
