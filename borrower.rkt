@@ -18,13 +18,13 @@
   (hash-ref borrower 'name))
 
 (define (set-name borrower name)
-  (hash-update borrower 'name (lambda (_) name)))
+  (hash-set borrower 'name name))
 
 (define (get-max-books borrower)
   (hash-ref borrower 'max-books))
 
 (define (set-max-books borrower max-books)
-  (hash-update borrower 'max-books (lambda (_) max-books)))
+  (hash-set borrower 'max-books max-books))
 
 (define (borrower-to-string borrower)
   (string-append (get-name borrower) " (" (number->string (get-max-books borrower)) " books)"))
