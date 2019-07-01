@@ -15,6 +15,12 @@
 (define (get-title book)
   (hash-ref book 'title))
 
+(define (get-author book)
+  (hash-ref book 'author))
+
+(define (get-borrower book)
+  (hash-ref book 'm-borrower))
+
 ;; (define (set-name borrower name)
 ;;   (hash-update borrower 'name (lambda (_) name)))
 
@@ -40,7 +46,10 @@
     (test-suite
       "Tests for borrower.rkt"
 
-      (check-equal? (get-title bk1) "Title1")))
+      (check-equal? (get-title bk1) "Title1")
+      (check-equal? (get-author bk1) "Author1")
+      (check-equal? (get-borrower bk1) #f)
+      (check-equal? (get-borrower bk2) br2)))
       ;; (check-equal? (set-name br1 "joey") (make-borrower "joey" 1))
       ;; (check-equal? (get-max-books br1) 1)
       ;; (check-equal? (set-max-books br1 10) (make-borrower "borrower1" 10))
