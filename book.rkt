@@ -1,6 +1,6 @@
-; ,cd "/home/eric/lisp_projects/scheme/racket/total-racket"
-; ,enter "book.rkt"
-; [eric@linux-x2vq total-racket](master)$ raco test "book.rkt"
+;; ,cd "/home/eric/lisp_projects/scheme/racket/total-racket"
+;; ,enter "book.rkt"
+;; [eric@linux-x2vq total-racket](master)$ raco test "book.rkt"
 
 #lang racket
 
@@ -24,7 +24,7 @@
 ;; (define (borrower-to-string borrower)
 ;;   (string-append (get-name borrower) " (" (number->string (get-max-books borrower)) " books)"))
 
-; Tests
+;; Tests
 (module* test #f
   (require rackunit
            rackunit/text-ui)
@@ -35,11 +35,11 @@
 
   (define file-tests
     (test-suite
-      "Tests for borrower.rkt"
+     "Tests for borrower.rkt"
 
-      (check-equal? (get-title bk1) "Title1")
-      (check-equal? (get-author bk1) "Author1")
-      (check-equal? (get-borrower bk1) #f)
-      (check-equal? (get-borrower bk2) br2)))
+     (check-equal? (get-title bk1) "Title1")
+     (check-equal? (get-author bk1) "Author1")
+     (check-equal? (get-borrower bk1) #f)
+     (check-equal? (get-borrower bk2) br2)))
 
   (run-tests file-tests))
