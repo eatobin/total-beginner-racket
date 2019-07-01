@@ -9,8 +9,8 @@
 (provide make-book
          get-title)
 
-(define (make-book title author)
-  (hasheq 'title title 'author author 'm-borrower #f))
+(define (make-book title author [m-borrower #f])
+  (hasheq 'title title 'author author 'm-borrower m-borrower))
 
 (define (get-title book)
   (hash-ref book 'title))
@@ -32,7 +32,9 @@
   (require rackunit
            rackunit/text-ui)
 
+  (define br2 (make-borrower "Borrower2" 2))
   (define bk1 (make-book "Title1" "Author1"))
+  (define bk2 (make-book "Title2" "Author2" br2))
 
   (define file-tests
     (test-suite
