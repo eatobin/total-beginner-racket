@@ -1,6 +1,6 @@
-; ,cd "/home/eric/lisp_projects/scheme/racket/total-racket"
-; ,enter "borrower.rkt"
-; [eric@linux-x2vq total-racket](master)$ raco test "borrower.rkt"
+;; ,cd "/home/eric/lisp_projects/scheme/racket/total-racket"
+;; ,enter "borrower.rkt"
+;; [eric@linux-x2vq total-racket](master)$ raco test "borrower.rkt"
 
 #lang racket
 
@@ -29,7 +29,7 @@
 (define (borrower-to-string borrower)
   (string-append (get-name borrower) " (" (number->string (get-max-books borrower)) " books)"))
 
-; Tests
+;; Tests
 (module* test #f
   (require rackunit
            rackunit/text-ui)
@@ -38,14 +38,14 @@
 
   (define file-tests
     (test-suite
-      "Tests for borrower.rkt"
+     "Tests for borrower.rkt"
 
-      (test-case
-        "Borrower has the correct name"
-          (check-equal? (get-name br1) "Borrower1"))
-      (check-equal? (set-name br1 "joey") (make-borrower "joey" 1))
-      (check-equal? (get-max-books br1) 1)
-      (check-equal? (set-max-books br1 10) (make-borrower "Borrower1" 10))
-      (check-equal? (borrower-to-string br1) "Borrower1 (1 books)")))
+     (test-case
+      "Borrower has the correct name"
+      (check-equal? (get-name br1) "Borrower1"))
+     (check-equal? (set-name br1 "joey") (make-borrower "joey" 1))
+     (check-equal? (get-max-books br1) 1)
+     (check-equal? (set-max-books br1 10) (make-borrower "Borrower1" 10))
+     (check-equal? (borrower-to-string br1) "Borrower1 (1 books)")))
 
   (run-tests file-tests))
