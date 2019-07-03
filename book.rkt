@@ -66,6 +66,7 @@
      (check-equal? (set-title bk1 "Norman") (make-book "Norman" "Author1"))
      (check-equal? (set-author bk1 "Wow") (make-book "Title1" "Wow"))
      (check-equal? (set-borrower bk1 (make-borrower "Borrower99" 99)) (make-book "Title1" "Author1" (make-borrower "Borrower99" 99)))
-     (check-equal? (book-to-string bk1) "Title1 by Author1; Available")))
+     (check-equal? (book-to-string bk1) "Title1 by Author1; Available")
+     (check-equal? (book-to-string bk2) "Title2 by Author2; Checked out to Borrower2")))
 
   (run-tests file-tests))
