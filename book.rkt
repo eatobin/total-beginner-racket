@@ -21,6 +21,15 @@
 (define (get-borrower book)
   (hash-ref book 'm-borrower))
 
+(define (set-title book title)
+  (hash-set book 'title title))
+
+(define (set-author book author)
+  (hash-set book 'author author))
+
+(define (set-borrower book borrower)
+  (hash-set book 'borrower borrower))
+
 ;; (define (borrower-to-string borrower)
 ;;   (string-append (get-name borrower) " (" (number->string (get-max-books borrower)) " books)"))
 
