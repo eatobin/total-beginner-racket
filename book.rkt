@@ -28,7 +28,7 @@
   (hash-set book 'author author))
 
 (define (set-borrower book borrower)
-  (hash-set book 'borrower borrower))
+  (hash-set book 'm-borrower borrower))
 
 ;; (define (borrower-to-string borrower)
 ;;   (string-append (get-name borrower) " (" (number->string (get-max-books borrower)) " books)"))
@@ -51,6 +51,7 @@
      (check-equal? (get-borrower bk1) #f)
      (check-equal? (get-borrower bk2) br2)
      (check-equal? (set-title bk1 "Norman") (make-book "Norman" "Author1"))
-     (check-equal? (set-author bk1 "Wow") (make-book "Title1" "Wow"))))
+     (check-equal? (set-author bk1 "Wow") (make-book "Title1" "Wow"))
+     (check-equal? (set-borrower bk1 (make-borrower "Borrower99" 99)) (make-book "Title1" "Author1" (make-borrower "Borrower99" 99)))))
 
   (run-tests file-tests))
