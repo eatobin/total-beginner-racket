@@ -9,7 +9,7 @@
 (provide make-book
          get-title)
 
-(define (make-book title author [maybe-borrower #f])
+(define (make-book title author [maybe-borrower 'null])
   (hasheq 'title title 'author author 'maybe-borrower maybe-borrower))
 
 (define (get-title book)
@@ -32,7 +32,7 @@
 
 (define (available-string book)
   (let ([borrower (get-borrower book)])
-    (if (false? borrower)
+    (if (eq? borrower 'null)
         "Available"
         (string-append
          "Checked out to "
@@ -61,7 +61,7 @@
 
      (check-equal? (get-title bk1) "Title1")
      (check-equal? (get-author bk1) "Author1")
-     (check-equal? (get-borrower bk1) #f)
+     (check-equal? (get-borrower bk1) 'null)
      (check-equal? (get-borrower bk2) br2)
      (check-equal? (set-title bk1 "Norman") (make-book "Norman" "Author1"))
      (check-equal? (set-author bk1 "Wow") (make-book "Title1" "Wow"))
