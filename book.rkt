@@ -30,8 +30,21 @@
 (define (set-borrower book borrower)
   (hash-set book 'm-borrower borrower))
 
-;; (define (borrower-to-string borrower)
-;;   (string-append (get-name borrower) " (" (number->string (get-max-books borrower)) " books)"))
+(define (available-string book)
+  (let ([borrower (get-borrower book)])
+    (if (false? borrower)
+        "Available"
+        (string-append
+         "Checked out to "
+         (get-name borrower)))))
+
+(define (book-to-string book)
+  (string-append
+   (get-title book)
+   " by "
+   (get-author book)
+   "; "
+   (available-string book)))
 
 ;; Tests
 (module* test #f
@@ -52,6 +65,7 @@
      (check-equal? (get-borrower bk2) br2)
      (check-equal? (set-title bk1 "Norman") (make-book "Norman" "Author1"))
      (check-equal? (set-author bk1 "Wow") (make-book "Title1" "Wow"))
-     (check-equal? (set-borrower bk1 (make-borrower "Borrower99" 99)) (make-book "Title1" "Author1" (make-borrower "Borrower99" 99)))))
+     (check-equal? (set-borrower bk1 (make-borrower "Borrower99" 99)) (make-book "Title1" "Author1" (make-borrower "Borrower99" 99)))
+     (check-equal? (book-to-string bk1) "Title1 by Author1; Available")))
 
   (run-tests file-tests))
