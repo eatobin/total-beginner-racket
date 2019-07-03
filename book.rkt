@@ -49,6 +49,8 @@
      (check-equal? (get-title bk1) "Title1")
      (check-equal? (get-author bk1) "Author1")
      (check-equal? (get-borrower bk1) #f)
-     (check-equal? (get-borrower bk2) br2)))
+     (check-equal? (get-borrower bk2) br2)
+     (check-equal? (set-title bk1 "Norman") (make-book "Norman" "Author1"))
+     (check-equal? (set-author bk1 "Wow") (make-book "Title1" "Wow"))))
 
   (run-tests file-tests))

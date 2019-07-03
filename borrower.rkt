@@ -43,7 +43,7 @@
      (test-case
       "Borrower has the correct name"
       (check-equal? (get-name br1) "Borrower1"))
-     (check-equal? (set-name br1 "joey") (make-borrower "joey" 1))
+     (check-equal? (set-name br1 "Joey") (make-borrower "Joey" 1))
      (check-equal? (get-max-books br1) 1)
      (check-equal? (set-max-books br1 10) (make-borrower "Borrower1" 10))
      (check-equal? (borrower-to-string br1) "Borrower1 (1 books)")))
