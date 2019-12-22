@@ -1,4 +1,4 @@
-;; ,cd "/home/eric/lisp_projects/scheme/racket/total-racket"
+;; ,cd "/home/eric/lisp_projects/scheme/total-racket"
 ;; ,enter "borrower.rkt"
 ;; [eric@linux-x2vq total-racket](master)$ raco test "borrower.rkt"
 
