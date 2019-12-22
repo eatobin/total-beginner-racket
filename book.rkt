@@ -1,3 +1,4 @@
+;; C-c, C-a to enter file!!!
 ;; ,cd "/home/eric/lisp_projects/scheme/racket/total-racket"
 ;; ,enter "book.rkt"
 ;; [eric@linux-x2vq total-racket](master)$ raco test "book.rkt"
