@@ -9,8 +9,8 @@
 (provide make-book
          get-title)
 
-(define (make-book title author [m-borrower #f])
-  (hasheq 'title title 'author author 'm-borrower m-borrower))
+(define (make-book title author [maybe-borrower 'null])
+  (hasheq 'title title 'author author 'maybe-borrower maybe-borrower))
 
 (define (get-title book)
   (hash-ref book 'title))
@@ -19,7 +19,7 @@
   (hash-ref book 'author))
 
 (define (get-borrower book)
-  (hash-ref book 'm-borrower))
+  (hash-ref book 'maybe-borrower))
 
 (define (set-title book title)
   (hash-set book 'title title))
@@ -28,10 +28,23 @@
   (hash-set book 'author author))
 
 (define (set-borrower book borrower)
-  (hash-set book 'm-borrower borrower))
+  (hash-set book 'maybe-borrower borrower))
 
-;; (define (borrower-to-string borrower)
-;;   (string-append (get-name borrower) " (" (number->string (get-max-books borrower)) " books)"))
+(define (available-string book)
+  (let ([borrower (get-borrower book)])
+    (if (eq? borrower 'null)
+        "Available"
+        (string-append
+         "Checked out to "
+         (get-name borrower)))))
+
+(define (book-to-string book)
+  (string-append
+   (get-title book)
+   " by "
+   (get-author book)
+   "; "
+   (available-string book)))
 
 ;; Tests
 (module* test #f
@@ -48,10 +61,12 @@
 
      (check-equal? (get-title bk1) "Title1")
      (check-equal? (get-author bk1) "Author1")
-     (check-equal? (get-borrower bk1) #f)
+     (check-equal? (get-borrower bk1) 'null)
      (check-equal? (get-borrower bk2) br2)
      (check-equal? (set-title bk1 "Norman") (make-book "Norman" "Author1"))
      (check-equal? (set-author bk1 "Wow") (make-book "Title1" "Wow"))
-     (check-equal? (set-borrower bk1 (make-borrower "Borrower99" 99)) (make-book "Title1" "Author1" (make-borrower "Borrower99" 99)))))
+     (check-equal? (set-borrower bk1 (make-borrower "Borrower99" 99)) (make-book "Title1" "Author1" (make-borrower "Borrower99" 99)))
+     (check-equal? (book-to-string bk1) "Title1 by Author1; Available")
+     (check-equal? (book-to-string bk2) "Title2 by Author2; Checked out to Borrower2")))
 
   (run-tests file-tests))
