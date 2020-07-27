@@ -12,7 +12,7 @@
          borrower-to-string)
 
 (define (make-borrower name max-books)
-  (hash 'name name 'max-books max-books))
+  (hasheq 'name name 'max-books max-books))
 
 (define (get-name borrower)
   (hash-ref borrower 'name))

@@ -11,7 +11,7 @@
          get-title)
 
 (define (make-book title author [borrower 'null])
-  (hash 'title title 'author author 'borrower borrower))
+  (hasheq 'title title 'author author 'borrower borrower))
 
 (define (get-title book)
   (hash-ref book 'title))
