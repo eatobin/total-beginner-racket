@@ -10,8 +10,8 @@
 (provide make-book
          get-title)
 
-(define (make-book title author [maybe-borrower 'null])
-  (hash 'title title 'author author 'maybe-borrower maybe-borrower))
+(define (make-book title author [borrower 'null])
+  (hash 'title title 'author author 'borrower borrower))
 
 (define (get-title book)
   (hash-ref book 'title))
@@ -20,7 +20,7 @@
   (hash-ref book 'author))
 
 (define (get-borrower book)
-  (hash-ref book 'maybe-borrower))
+  (hash-ref book 'borrower))
 
 (define (set-title book title)
   (hash-set book 'title title))
@@ -29,7 +29,7 @@
   (hash-set book 'author author))
 
 (define (set-borrower book borrower)
-  (hash-set book 'maybe-borrower borrower))
+  (hash-set book 'borrower borrower))
 
 (define (available-string book)
   (let ([borrower (get-borrower book)])
