@@ -4,48 +4,54 @@
 
 #lang racket
 
-(provide make-borrower
-         get-name
-         set-name
-         get-max-books
-         set-max-books
-         borrower-to-string)
+;; (provide make-borrower
+;;          get-name
+;;          set-name
+;;          get-max-books
+;;          set-max-books
+;;          borrower-to-string)
 
-(define (make-borrower name max-books)
-  (hasheq 'name name 'max-books max-books))
+(struct borrower (name max-books) #:transparent)
 
-(define (get-name borrower)
-  (hash-ref borrower 'name))
+(define (set-name br n)
+  (struct-copy borrower br
+               [name n]))
 
-(define (set-name borrower name)
-  (hash-set borrower 'name name))
+;; (define (make-borrower name max-books)
+;;   (hasheq 'name name 'max-books max-books))
 
-(define (get-max-books borrower)
-  (hash-ref borrower 'max-books))
+;; (define (get-name borrower)
+;;   (hash-ref borrower 'name))
 
-(define (set-max-books borrower max-books)
-  (hash-set borrower 'max-books max-books))
+;; (define (set-name borrower name)
+;;   (hash-set borrower 'name name))
 
-(define (borrower-to-string borrower)
-  (string-append (get-name borrower) " (" (number->string (get-max-books borrower)) " books)"))
+;; (define (get-max-books borrower)
+;;   (hash-ref borrower 'max-books))
 
-;; Tests
-(module* test #f
-  (require rackunit
-           rackunit/text-ui)
+;; (define (set-max-books borrower max-books)
+;;   (hash-set borrower 'max-books max-books))
 
-  (define br1 (make-borrower "Borrower1" 1))
+;; (define (borrower-to-string borrower)
+;;   (string-append (get-name borrower) " (" (number->string (get-max-books borrower)) " books)"))
 
-  (define file-tests
-    (test-suite
-     "Tests for borrower.rkt"
+;; ;; Tests
+;; (module* test #f
+;;   (require rackunit
+;;            rackunit/text-ui)
 
-     (test-case
-      "Borrower has the correct name"
-      (check-equal? (get-name br1) "Borrower1"))
-     (check-equal? (set-name br1 "Joey") (make-borrower "Joey" 1))
-     (check-equal? (get-max-books br1) 1)
-     (check-equal? (set-max-books br1 10) (make-borrower "Borrower1" 10))
-     (check-equal? (borrower-to-string br1) "Borrower1 (1 books)")))
+;;   (define br1 (make-borrower "Borrower1" 1))
 
-  (run-tests file-tests))
+;;   (define file-tests
+;;     (test-suite
+;;      "Tests for borrower.rkt"
+
+;;      (test-case
+;;       "Borrower has the correct name"
+;;       (check-equal? (get-name br1) "Borrower1"))
+;;      (check-equal? (set-name br1 "Joey") (make-borrower "Joey" 1))
+;;      (check-equal? (get-max-books br1) 1)
+;;      (check-equal? (set-max-books br1 10) (make-borrower "Borrower1" 10))
+;;      (check-equal? (borrower-to-string br1) "Borrower1 (1 books)")))
+
+;;   (run-tests file-tests))
