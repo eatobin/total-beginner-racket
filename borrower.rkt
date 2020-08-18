@@ -29,8 +29,9 @@
 ;; (define (get-max-books borrower)
 ;;   (hash-ref borrower 'max-books))
 
-;; (define (set-max-books borrower max-books)
-;;   (hash-set borrower 'max-books max-books))
+(define (set-max-books br mb)
+  (struct-copy borrower br
+               [max-books mb]))
 
 ;; (define (borrower-to-string borrower)
 ;;   (string-append (get-name borrower) " (" (number->string (get-max-books borrower)) " books)"))
@@ -50,8 +51,8 @@
       "Borrower has the correct name"
       (check-equal? (borrower-name br1) "Borrower1")
       (check-equal? (set-name br1 "Joey") (borrower "Joey" 1))
-      (check-equal? (borrower-max-books br1) 1))))
-     ; (check-equal? (set-max-books br1 10) (make-borrower "Borrower1" 10))
+      (check-equal? (borrower-max-books br1) 1)
+      (check-equal? (set-max-books br1 10) (borrower "Borrower1" 10)))))
      ; (check-equal? (borrower-to-string br1) "Borrower1 (1 books)")))
 
   (run-tests file-tests))
