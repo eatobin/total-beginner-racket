@@ -4,12 +4,9 @@
 
 #lang racket
 
-;; (provide make-borrower
-;;          get-name
-;;          set-name
-;;          get-max-books
-;;          set-max-books
-;;          borrower-to-string)
+(provide set-name
+         set-max-books
+         borrower-to-string)
 
 (struct borrower (name max-books) #:transparent)
 
@@ -17,24 +14,12 @@
   (struct-copy borrower br
                [name n]))
 
-;; (define (make-borrower name max-books)
-;;   (hasheq 'name name 'max-books max-books))
-
-;; (define (get-name borrower)
-;;   (hash-ref borrower 'name))
-
-;; (define (set-name borrower name)
-;;   (hash-set borrower 'name name))
-
-;; (define (get-max-books borrower)
-;;   (hash-ref borrower 'max-books))
-
 (define (set-max-books br mb)
   (struct-copy borrower br
                [max-books mb]))
 
-;; (define (borrower-to-string borrower)
-;;   (string-append (get-name borrower) " (" (number->string (get-max-books borrower)) " books)"))
+(define (borrower-to-string br)
+  (string-append (borrower-name br) " (" (number->string (borrower-max-books br)) " books)"))
 
 ;; Tests
 (module* test #f
@@ -52,7 +37,7 @@
       (check-equal? (borrower-name br1) "Borrower1")
       (check-equal? (set-name br1 "Joey") (borrower "Joey" 1))
       (check-equal? (borrower-max-books br1) 1)
-      (check-equal? (set-max-books br1 10) (borrower "Borrower1" 10)))))
-     ; (check-equal? (borrower-to-string br1) "Borrower1 (1 books)")))
+      (check-equal? (set-max-books br1 10) (borrower "Borrower1" 10))
+      (check-equal? (borrower-to-string br1) "Borrower1 (1 books)"))))
 
   (run-tests file-tests))
