@@ -50,8 +50,12 @@
                                             (test-suite
                                              "Tests for book.rkt"
 
-                                             (check-equal? (book-title bk1) "Title1")
-                                             (check-equal? (book-author bk1) "Author14")))
+                                             (test-case
+                                              "Book has the correct title"
+                                             (check-equal? (book-title bk1) "Title1"))
+                                             (test-case
+                                                "Book has the correct author"
+                                             (check-equal? (book-author bk1) "Author1"))))
                                         ;      (check-equal? (get-borrower bk1) 'null)
                                         ;      (check-equal? (get-borrower bk2) br2)
                                         ;      (check-equal? (set-title bk1 "Norman") (make-book "Norman" "Author1"))
