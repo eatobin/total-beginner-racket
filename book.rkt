@@ -55,8 +55,13 @@
                                              (check-equal? (book-title bk1) "Title1"))
                                              (test-case
                                                 "Book has the correct author"
-                                             (check-equal? (book-author bk1) "Author1"))))
-                                        ;      (check-equal? (get-borrower bk1) 'null)
+                                             (check-equal? (book-author bk1) "Author1"))
+                                          (test-case
+                                                "Book has the correct null borrower"
+                                             (check-equal? (book-maybe-borrower bk1) 'null))
+                                            (test-case
+                                                "Book has the correct borrower"
+                                             (check-equal? (book-maybe-borrower bk2) br2))))
                                         ;      (check-equal? (get-borrower bk2) br2)
                                         ;      (check-equal? (set-title bk1 "Norman") (make-book "Norman" "Author1"))
                                         ;      (check-equal? (set-author bk1 "Wow") (make-book "Title1" "Wow"))
