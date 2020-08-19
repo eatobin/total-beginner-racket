@@ -1,73 +1,63 @@
 ;; C-c, C-a to enter file!!!
-;; ,cd "/home/eric/lisp_projects/scheme/racket/total-racket"
+;; ,cd "~/lisp_projects/scheme/racket/total-racket"
 ;; ,enter "book.rkt"
 ;; [eric@linux-x2vq total-racket](master)$ raco test "book.rkt"
 
-#lang racket
+(module book racket
+  (require struct-update
+           "borrower.rkt")
 
-(require "borrower.rkt")
+  (provide (struct-updaters-out book))
 
-(provide make-book
-         get-title)
+  (struct book (title author maybe-borrower) #:transparent)
+  (define-struct-updaters book)
 
-(define (make-book title author [maybe-borrower 'null])
-  (hasheq 'title title 'author author 'maybe-borrower maybe-borrower))
+  (define (set-title bk ttl)
+    (book-title-set bk ttl))
 
-(define (get-title book)
-  (hash-ref book 'title))
+  (define (set-author bk aut)
+    (book-author-set bk aut))
 
-(define (get-author book)
-  (hash-ref book 'author))
+  (define (set-borrower bk mbr)
+    (book-maybe-borrower-set bk mbr)))
 
-(define (get-borrower book)
-  (hash-ref book 'maybe-borrower))
+                                        ; (define (available-string book)
+                                        ;   (let ([borrower (get-borrower book)])
+                                        ;     (if (eq? borrower 'null)
+                                        ;         "Available"
+                                        ;         (string-append
+                                        ;          "Checked out to "
+                                        ;          (get-name borrower)))))
 
-(define (set-title book title)
-  (hash-set book 'title title))
+                                        ; (define (book-to-string book)
+                                        ;   (string-append
+                                        ;    (get-title book)
+                                        ;    " by "
+                                        ;    (get-author book)
+                                        ;    "; "
+                                        ;    (available-string book)))
 
-(define (set-author book author)
-  (hash-set book 'author author))
+                                        ; ;; Tests
+                                        ; (module* test #f
+                                        ;   (require rackunit
+                                        ;            rackunit/text-ui)
 
-(define (set-borrower book borrower)
-  (hash-set book 'maybe-borrower borrower))
+                                        ;   (define br2 (make-borrower "Borrower2" 2))
+                                        ;   (define bk1 (make-book "Title1" "Author1"))
+                                        ;   (define bk2 (make-book "Title2" "Author2" br2))
 
-(define (available-string book)
-  (let ([borrower (get-borrower book)])
-    (if (eq? borrower 'null)
-        "Available"
-        (string-append
-         "Checked out to "
-         (get-name borrower)))))
+                                        ;   (define file-tests
+                                        ;     (test-suite
+                                        ;      "Tests for borrower.rkt"
 
-(define (book-to-string book)
-  (string-append
-   (get-title book)
-   " by "
-   (get-author book)
-   "; "
-   (available-string book)))
+                                        ;      (check-equal? (get-title bk1) "Title1")
+                                        ;      (check-equal? (get-author bk1) "Author1")
+                                        ;      (check-equal? (get-borrower bk1) 'null)
+                                        ;      (check-equal? (get-borrower bk2) br2)
+                                        ;      (check-equal? (set-title bk1 "Norman") (make-book "Norman" "Author1"))
+                                        ;      (check-equal? (set-author bk1 "Wow") (make-book "Title1" "Wow"))
+                                        ;      (check-equal? (set-borrower bk1 (make-borrower "Borrower99" 99)) (make-book "Title1" "Author1" (make-borrower "Borrower99" 99)))
+                                        ;      (check-equal? (book-to-string bk1) "Title1 by Author1; Available")
+                                        ;      (check-equal? (book-to-string bk2) "Title2 by Author2; Checked out to Borrower2")))
 
-;; Tests
-(module* test #f
-  (require rackunit
-           rackunit/text-ui)
-
-  (define br2 (make-borrower "Borrower2" 2))
-  (define bk1 (make-book "Title1" "Author1"))
-  (define bk2 (make-book "Title2" "Author2" br2))
-
-  (define file-tests
-    (test-suite
-     "Tests for borrower.rkt"
-
-     (check-equal? (get-title bk1) "Title1")
-     (check-equal? (get-author bk1) "Author1")
-     (check-equal? (get-borrower bk1) 'null)
-     (check-equal? (get-borrower bk2) br2)
-     (check-equal? (set-title bk1 "Norman") (make-book "Norman" "Author1"))
-     (check-equal? (set-author bk1 "Wow") (make-book "Title1" "Wow"))
-     (check-equal? (set-borrower bk1 (make-borrower "Borrower99" 99)) (make-book "Title1" "Author1" (make-borrower "Borrower99" 99)))
-     (check-equal? (book-to-string bk1) "Title1 by Author1; Available")
-     (check-equal? (book-to-string bk2) "Title2 by Author2; Checked out to Borrower2")))
-
-  (run-tests file-tests))
+                                        ;   (run-tests file-tests)))
