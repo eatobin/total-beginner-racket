@@ -34,10 +34,18 @@
 
        (test-case
         "Borrower has the correct name"
-        (check-equal? (borrower-name br1) "Borrower1")
-        (check-equal? (set-name br1 "Joey") (borrower "Joey" 1))
-        (check-equal? (borrower-max-books br1) 1)
-        (check-equal? (set-max-books br1 10) (borrower "Borrower1" 10))
+        (check-equal? (borrower-name br1) "Borrower1"))
+       (test-case
+        "Borrower sets the correct name"
+        (check-equal? (set-name br1 "Joey") (borrower "Joey" 1)))
+       (test-case
+        "Borrower has the correct max-books"
+        (check-equal? (borrower-max-books br1) 1))
+       (test-case
+        "Borrower sets the correct max-books"
+        (check-equal? (set-max-books br1 10) (borrower "Borrower1" 10)))
+       (test-case
+        "Borrower prints the correct borrower to string"
         (check-equal? (borrower-to-string br1) "Borrower1 (1 books)"))))
 
     (run-tests file-tests)))

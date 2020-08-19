@@ -48,10 +48,10 @@
 
                                           (define file-tests
                                             (test-suite
-                                             "Tests for borrower.rkt"
+                                             "Tests for book.rkt"
 
-                                             (check-equal? (book-title bk1) "Title1")))
-                                        ;      (check-equal? (get-author bk1) "Author1")
+                                             (check-equal? (book-title bk1) "Title1")
+                                             (check-equal? (book-author bk1) "Author14")))
                                         ;      (check-equal? (get-borrower bk1) 'null)
                                         ;      (check-equal? (get-borrower bk2) br2)
                                         ;      (check-equal? (set-title bk1 "Norman") (make-book "Norman" "Author1"))
