@@ -2,50 +2,51 @@
 ;; ,enter "borrower.rkt"
 ;; [eric@linux-x2vq total-racket](master)$ raco test "borrower.rkt"
 
-(module borrower racket
-  (provide (struct-out borrower)
-           set-name
-           set-max-books
-           borrower-to-string)
+#lang racket
 
-  (struct borrower (name max-books) #:transparent)
+(provide (struct-out borrower)
+         set-name
+         set-max-books
+         borrower-to-string)
 
-  (define (set-name br n)
-    (struct-copy borrower br
-                 [name n]))
+(struct borrower (name max-books) #:transparent)
 
-  (define (set-max-books br mb)
-    (struct-copy borrower br
-                 [max-books mb]))
+(define (set-name br n)
+  (struct-copy borrower br
+               [name n]))
 
-  (define (borrower-to-string br)
-    (string-append (borrower-name br) " (" (number->string (borrower-max-books br)) " books)"))
+(define (set-max-books br mb)
+  (struct-copy borrower br
+               [max-books mb]))
 
-  ;; Tests
-  (module* test #f
-    (require rackunit
-             rackunit/text-ui)
+(define (borrower-to-string br)
+  (string-append (borrower-name br) " (" (number->string (borrower-max-books br)) " books)"))
 
-    (define br1 (borrower "Borrower1" 1))
+;; Tests
+(module* test #f
+  (require rackunit
+           rackunit/text-ui)
 
-    (define file-tests
-      (test-suite
-       "Tests for borrower.rkt"
+  (define br1 (borrower "Borrower1" 1))
 
-       (test-case
-        "Borrower has the correct name"
-        (check-equal? (borrower-name br1) "Borrower1"))
-       (test-case
-        "Borrower sets the correct name"
-        (check-equal? (set-name br1 "Joey") (borrower "Joey" 1)))
-       (test-case
-        "Borrower has the correct max-books"
-        (check-equal? (borrower-max-books br1) 1))
-       (test-case
-        "Borrower sets the correct max-books"
-        (check-equal? (set-max-books br1 10) (borrower "Borrower1" 10)))
-       (test-case
-        "Borrower prints the correct borrower to string"
-        (check-equal? (borrower-to-string br1) "Borrower1 (1 books)"))))
+  (define file-tests
+    (test-suite
+     "Tests for borrower.rkt"
 
-    (run-tests file-tests)))
+     (test-case
+      "Borrower has the correct name"
+      (check-equal? (borrower-name br1) "Borrower1"))
+     (test-case
+      "Borrower sets the correct name"
+      (check-equal? (set-name br1 "Joey") (borrower "Joey" 1)))
+     (test-case
+      "Borrower has the correct max-books"
+      (check-equal? (borrower-max-books br1) 1))
+     (test-case
+      "Borrower sets the correct max-books"
+      (check-equal? (set-max-books br1 10) (borrower "Borrower1" 10)))
+     (test-case
+      "Borrower prints the correct borrower to string"
+      (check-equal? (borrower-to-string br1) "Borrower1 (1 books)"))))
+
+  (run-tests file-tests))
