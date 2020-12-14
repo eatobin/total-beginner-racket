@@ -4,20 +4,21 @@
 
 #lang racket
 
-(provide (struct-out borrower)
+(require struct-update)
+
+(provide (struct-updaters-out borrower)
          set-name
          set-max-books
          borrower-to-string)
 
 (struct borrower (name max-books) #:transparent)
+(define-struct-updaters borrower)
 
 (define (set-name br n)
-  (struct-copy borrower br
-               [name n]))
+  (borrower-name-set br n))
 
 (define (set-max-books br mb)
-  (struct-copy borrower br
-               [max-books mb]))
+  (borrower-max-books-set br mb))
 
 (define (borrower-to-string br)
   (string-append (borrower-name br) " (" (number->string (borrower-max-books br)) " books)"))
