@@ -4,6 +4,7 @@
 
 #lang racket
 
+(require fmt)
 (require struct-update)
 
 (provide (struct+updaters-out borrower)
@@ -28,13 +29,10 @@
   (define file-tests
     (test-suite
      "Tests for borrower.rkt"
-
-     (test-case
-      "Borrower prints the correct borrower to string"
-      (check-equal? (borrower-to-string br1) br-str))
-     (test-case
-      "Borrower sets the correct name"
-      (check-equal? (borrower-to-string (borrower-name-set bad-name "Borrower1")) br-str))
+     (test-case "Borrower prints the correct borrower to string"
+                (check-equal? (borrower-to-string br1) br-str))
+     (test-case "Borrower sets the correct name"
+                (check-equal? (borrower-to-string (borrower-name-set bad-name "Borrower1")) br-str))
      "Borrower sets the correct max-books"
      (check-equal? (borrower-to-string (borrower-max-books-set bad-mb 1)) br-str)))
 
