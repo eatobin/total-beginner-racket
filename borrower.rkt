@@ -4,8 +4,8 @@
 
 #lang racket
 
-(require fmt)
-(require struct-update)
+(require fmt
+         struct-update)
 
 (provide (struct+updaters-out borrower)
          borrower-to-string)

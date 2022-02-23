@@ -5,7 +5,8 @@
 
 #lang racket
 
-(require struct-update
+(require fmt
+         struct-update
          "borrower.rkt")
 
 (provide (struct+updaters-out book)
@@ -16,19 +17,10 @@
 
 (define (available-string book)
   (let ([borrower (book-maybe-borrower book)])
-    (if (eq? borrower 'null)
-        "Available"
-        (string-append
-         "Checked out to "
-         (borrower-name borrower)))))
+    (if (eq? borrower 'null) "Available" (string-append "Checked out to " (borrower-name borrower)))))
 
 (define (book-to-string book)
-  (string-append
-   (book-title book)
-   " by "
-   (book-author book)
-   "; "
-   (available-string book)))
+  (string-append (book-title book) " by " (book-author book) "; " (available-string book)))
 
 ;; Tests
 (module* test #f
@@ -46,21 +38,13 @@
   (define file-tests
     (test-suite
      "Tests for book.rkt"
-
-     (test-case
-      "Book has the correct avail string"
-      (check-equal? (book-to-string bk1) bk-str-avail))
-     (test-case
-      "Book has the correct out string"
-      (check-equal? (book-to-string bk2) bk-str-out))
-     (test-case
-      "Book sets the correct title"
-      (check-equal? (book-to-string (book-title-set bad-title "Title2")) bk-str-avail))
-     (test-case
-      "Book sets the correct author"
-      (check-equal? (book-to-string (book-author-set bad-author "Author2")) bk-str-avail))
-     (test-case
-      "Book sets the correct borrower"
-      (check-equal? (book-to-string (book-maybe-borrower-set bk1 br2)) bk-str-out))))
+     (test-case "Book has the correct avail string" (check-equal? (book-to-string bk1) bk-str-avail))
+     (test-case "Book has the correct out string" (check-equal? (book-to-string bk2) bk-str-out))
+     (test-case "Book sets the correct title"
+                (check-equal? (book-to-string (book-title-set bad-title "Title2")) bk-str-avail))
+     (test-case "Book sets the correct author"
+                (check-equal? (book-to-string (book-author-set bad-author "Author2")) bk-str-avail))
+     (test-case "Book sets the correct borrower"
+                (check-equal? (book-to-string (book-maybe-borrower-set bk1 br2)) bk-str-out))))
 
   (run-tests file-tests))
