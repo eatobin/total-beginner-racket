@@ -1,4 +1,5 @@
 #lang racket
 
-(require "borrower.rkt"
+(require fmt
+         "borrower.rkt"
          "book.rkt")
