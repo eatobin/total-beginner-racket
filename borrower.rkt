@@ -4,8 +4,8 @@
 
 #lang racket
 
-(module+ test
-  )
+(module+ test)
+
 (require fmt
          rackunit
          struct-update)
