@@ -4,10 +4,10 @@
 
 #lang racket
 
-(module+ test)
+(module+ test
+  )
 
-(require fmt
-         rackunit
+(require rackunit
          struct-update)
 
 (provide (struct+updaters-out borrower)
